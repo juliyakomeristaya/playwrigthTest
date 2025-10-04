@@ -1,0 +1,22 @@
+{
+  "name": "playwrigthtest",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/juliyakomeristaya/playwrigthTest.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/juliyakomeristaya/playwrigthTest/issues"
+  },
+  "homepage": "https://github.com/juliyakomeristaya/playwrigthTest#readme",
+  "description": "",
+  "devDependencies": {
+    "@playwright/test": "^1.55.1",
+    "@types/node": "^24.6.2"
+  }
+}
