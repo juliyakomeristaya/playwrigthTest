@@ -1,0 +1,10 @@
+{
+  "validData": {
+    "name": "Yulia",
+    "lastName": "Kom",
+    "emailPrefix": "TestUser",
+    "emailDomain": "@gmail.com",
+    "password": "ValidPass123!",
+    "repeatPassword": "ValidPass123!"
+  }
+}
