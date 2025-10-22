@@ -1,5 +1,6 @@
 import { Locator } from "@playwright/test";
 import BasePage from "../BasePage";
+import { step } from "../../utils/stepDecoretor";
 
 export default class SignUpForm extends BasePage {
   public readonly labelTitle: Locator = this.page.locator(
@@ -46,28 +47,42 @@ export default class SignUpForm extends BasePage {
     '//p[@class="alert alert-danger"]',
   );
 
+  @step("Enter name: {name}")
   async enterName(name: string): Promise<void> {
     await this.nameField.fill(name);
   }
+
+  @step("Enter last name: {lastName}")
   async enterLastName(lastName: string): Promise<void> {
     await this.lastNameField.fill(lastName);
   }
+
+  @step("Enter email: {email}")
   async enterEmail(email: string): Promise<void> {
     await this.emailField.fill(email);
   }
+
+  @step("Enter password")
   async enterPassword(password: string): Promise<void> {
     await this.passwordField.fill(password);
   }
+
+  @step("Enter repeat password")
   async enterRepeatPassword(repeatPassword: string): Promise<void> {
     await this.repeatPasswordField.fill(repeatPassword);
   }
+
+  @step("Click Sign Up button")
   async clickSignUpButton(): Promise<void> {
     await this.signUpButton.click();
   }
+  @step("Trigger validation error on field")
   async triggerErrorOnField(field: Locator): Promise<void> {
     await field.focus();
     await field.blur();
   }
+
+  @step("Sign up user with name: {name}, lastName: {lastName}, email: {email}")
   async signUpUser(
     name: string,
     lastName: string,
