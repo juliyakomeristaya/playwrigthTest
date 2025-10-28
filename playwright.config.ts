@@ -1,5 +1,5 @@
 import { defineConfig, devices } from "@playwright/test";
-import dotenv from 'dotenv';
+import dotenv from "dotenv";
 dotenv.config();
 
 /**
@@ -42,14 +42,16 @@ export default defineConfig({
   /* Configure projects for major browsers */
   projects: [
     {
-      name: "chromium",
+      name: "e2e",
       use: { ...devices["Desktop Chrome"] },
+      testIgnore: "**/setup/**.setup.ts",
+      dependencies: ["setup"],
     },
-
-    // {
-    //   name: 'firefox',
-    //   use: { ...devices['Desktop Firefox'] },
-    // },
+    {
+      name: "setup",
+      use: { ...devices["Desktop Chrome"] },
+      testMatch: "**/setup/**.setup.ts",
+    },
 
     // {
     //   name: 'webkit',

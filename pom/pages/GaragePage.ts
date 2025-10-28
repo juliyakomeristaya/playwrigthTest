@@ -1,6 +1,6 @@
 import { Locator } from "@playwright/test";
 import BasePage from "../BasePage";
-import { step } from "../../utils/stepDecoretor";
+import { step } from "../../utils/stepDecorator";
 
 export default class GaragePage extends BasePage {
   private readonly addCarButton: Locator = this.page.locator(
