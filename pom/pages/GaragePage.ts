@@ -3,9 +3,7 @@ import BasePage from "../BasePage";
 import { step } from "../../utils/stepDecorator";
 
 export default class GaragePage extends BasePage {
-  private readonly addCarButton: Locator = this.page.locator(
-    '//div[@class="panel-page"]//button',
-  );
+  private readonly addCarButton: Locator = this.page.getByRole('button', { name: 'Add car' });
   public readonly pageTitle: Locator = this.page.getByRole("heading", {
     name: "Garage",
   });
