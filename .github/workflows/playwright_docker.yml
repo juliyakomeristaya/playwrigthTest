@@ -1,0 +1,65 @@
+name: Playwright Tests in Docker
+on:
+  workflow_dispatch:
+    inputs:
+      test_options:
+        description: 'Options for the Playwright tests'
+        required: false
+        default: ''
+  push:
+    branches:
+      - main
+      - lesson31
+  pull_request:
+    branches:
+      - main
+
+env:
+  HTTP_USERNAME: ${{ secrets.HTTP_USERNAME }}
+  HTTP_PASSWORD: ${{ secrets.HTTP_PASSWORD }}
+
+jobs:
+  test-docker:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v5
+    
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+    
+    - name: Build Docker image
+      uses: docker/build-push-action@v6
+      with:
+        context: .
+        push: false
+        load: true
+        tags: playwright-tests:latest
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
+    
+    - name: Run tests in Docker container
+      run: |
+        docker run --rm \
+          -e HTTP_USERNAME=${{ secrets.HTTP_USERNAME }} \
+          -e HTTP_PASSWORD=${{ secrets.HTTP_PASSWORD }} \
+          -v ${{ github.workspace }}/playwright-report:/tests/playwright-report \
+          -v ${{ github.workspace }}/test-results:/tests/test-results \
+          playwright-tests:latest npx playwright test ${{ inputs.test_options }}
+    
+    - name: Upload test results
+      uses: actions/upload-artifact@v4
+      if: ${{ !cancelled() }}
+      with:
+        name: playwright-report-docker
+        path: playwright-report/
+        retention-days: 30
+    
+    - name: Upload test artifacts
+      uses: actions/upload-artifact@v4
+      if: ${{ !cancelled() }}
+      with:
+        name: test-results-docker
+        path: test-results/
+        retention-days: 30
