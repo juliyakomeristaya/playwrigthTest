@@ -7,8 +7,8 @@ on:
     branches:
       - main
 env:
-  HTTP_USERNAME: ${{ secrets.TEST_USERNAME }}
-  HTTP_PASSWORD: ${{ secrets.TEST_PASSWORD }} 
+  TEST_USERNAME: ${{ secrets.TEST_USERNAME }}
+  TEST_PASSWORD: ${{ secrets.TEST_PASSWORD }} 
 
 jobs:
   test:
