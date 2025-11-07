@@ -42,8 +42,8 @@ jobs:
     - name: Run tests in Docker container
       run: |
         docker run --rm \
-          -e HTTP_USERNAME=${{ secrets.HTTP_USERNAME }} \
-          -e HTTP_PASSWORD=${{ secrets.HTTP_PASSWORD }} \
+          -e TEST_USERNAME=${{ secrets.TEST_USERNAME }} \
+          -e TEST_PASSWORD=${{ secrets.TEST_PASSWORD }} \
           -v ${{ github.workspace }}/playwright-report:/tests/playwright-report \
           -v ${{ github.workspace }}/test-results:/tests/test-results \
           playwright-tests:latest npx playwright test ${{ inputs.test_options }}
